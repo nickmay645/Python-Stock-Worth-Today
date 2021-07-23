@@ -1,0 +1,30 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="17">
+            <item index="0" class="java.lang.String" itemvalue="system-service" />
+            <item index="1" class="java.lang.String" itemvalue="Brlapi" />
+            <item index="2" class="java.lang.String" itemvalue="onboard" />
+            <item index="3" class="java.lang.String" itemvalue="python-xapp" />
+            <item index="4" class="java.lang.String" itemvalue="xkit" />
+            <item index="5" class="java.lang.String" itemvalue="ufw" />
+            <item index="6" class="java.lang.String" itemvalue="pycups" />
+            <item index="7" class="java.lang.String" itemvalue="pycrypto" />
+            <item index="8" class="java.lang.String" itemvalue="cupshelpers" />
+            <item index="9" class="java.lang.String" itemvalue="mate-tweak" />
+            <item index="10" class="java.lang.String" itemvalue="systemd-python" />
+            <item index="11" class="java.lang.String" itemvalue="picamera" />
+            <item index="12" class="java.lang.String" itemvalue="language-selector" />
+            <item index="13" class="java.lang.String" itemvalue="mate-hud" />
+            <item index="14" class="java.lang.String" itemvalue="RPi.GPIO" />
+            <item index="15" class="java.lang.String" itemvalue="pygobject" />
+            <item index="16" class="java.lang.String" itemvalue="unattended-upgrades" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
