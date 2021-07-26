@@ -1,32 +1,79 @@
-import requests
+import sys
 import yfinance as yf
 import datetime
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+import ctypes
+
+#  Icon in Windows Taskbar
+myAppID = 'stock_worth_today.001'  # arbitrary string
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myAppID)
+
+
+class StockWorthToday(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Stock Worth Today")
+        self.setWindowIcon(QIcon('icon.png'))
+
+        # Window setup
+        self.window = QWidget()
+        self.window.setWindowTitle("Stock Worth Today")
+        self.window.setMinimumWidth(800)
+        self.window.setMinimumHeight(700)
+        self.window.setWindowIcon(QIcon('icon.png'))
+
+        # Widget setup
+
+        # Ticker Label
+        self.tickerLabel = QLabel("Enter stock ticker symbol:")
+
+        # Ticker Line Edit
+        self.tickerLineEdit = QLineEdit()
+        self.tickerLineEdit.textChanged.connect(self.auto_capital)  # Auto Capital
+
+        # Initial Investment Label
+        self.initialInvestmentLabel = QLabel("Enter initial investment:")
+
+        # Initial Investment Spin Box
+        self.initialInvestmentSpinBox = QDoubleSpinBox()
+        self.initialInvestmentSpinBox.setMaximum(10000000)
+        self.initialInvestmentSpinBox.setMinimum(0.001)
+        self.initialInvestmentSpinBox.setValue(1000)
+        self.initialInvestmentSpinBox.setPrefix('$')
+
+        # Date Select Label
+        self.dateSelectLabel = QLabel("Select Initial Investment Date")
+
+        # Date Select
+        self.dateSelect = QCalendarWidget()
+
+        # Run Button
+        self.runButton = QPushButton("Run")
+
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.tickerLabel)
+        self.layout.addWidget(self.tickerLineEdit)
+        self.layout.addWidget(self.initialInvestmentLabel)
+        self.layout.addWidget(self.initialInvestmentSpinBox)
+        self.layout.addWidget(self.dateSelectLabel)
+        self.layout.addWidget(self.dateSelect)
+        self.layout.addWidget(self.runButton)
+
+        self.window.setLayout(self.layout)
+
+    def auto_capital(self, txt):
+        cap_text = txt.title()
+        upp_text = txt.upper()  # All Upper Case
+        self.tickerLineEdit.setText(upp_text)
+
+
+def main():
+    app = QApplication(sys.argv)
+    main_window = StockWorthToday()
+    main_window.window.show()
+    sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
-
-    print('Worth Today Stock Calculator')
-    print('-----------------------------')
-    print()
-    today = datetime.date.today()
-    # ticker_name = 'AMD'
-    ticker_name = input("Enter ticker symbol: ")
-    date = input("Enter date: YYYY-MM-DD: ")
-    investment = input("Initial Investment: ")
-
-
-    ticker = yf.Ticker(ticker_name)
-    # ticker_df = ticker.history(period="max")
-    current_price = ticker.info['currentPrice']
-    past_data = yf.download(ticker_name, start=date)
-    past_price = past_data['Close'].array[0]
-    percent_change = ((current_price / past_price) - 1) * 100
-    val_today = float(investment) * float(float(current_price) / float(past_price))
-    print()
-    print("Results\n-----------------------------\n")
-    print(f"{ticker_name} change from {date} to {today}")
-    print(f"Percent Change: {percent_change}%")
-    print(f"Initial Investment: ${investment}")
-    print(f"Value Today: {val_today}")
-    print(f"Total Gain: ${val_today-float(investment)}")
-
-
+    main()
